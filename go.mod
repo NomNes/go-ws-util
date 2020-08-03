@@ -1,4 +1,4 @@
-module go-ws-util
+module github.com/NomNes/go-ws-util
 
 go 1.14
 
