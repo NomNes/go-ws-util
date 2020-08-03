@@ -1,0 +1,10 @@
+github.com/gobwas/httphead v0.0.0-20180130184737-2c6c146eadee h1:s+21KNqlpePfkah2I+gwHF8xmJWRjooY+5248k6m4A0=
+github.com/gobwas/httphead v0.0.0-20180130184737-2c6c146eadee/go.mod h1:L0fX3K22YWvt/FAX9NnzrNzcI4wNYi9Yku4O0LKYflo=
+github.com/gobwas/pool v0.2.1 h1:xfeeEhW7pwmX8nuLVlqbzVc7udMDrwetjEv+TZIz1og=
+github.com/gobwas/pool v0.2.1/go.mod h1:q8bcK0KcYlCgd9e7WYLm9LpyS+YeLd8JVDW6WezmKEw=
+github.com/gobwas/ws v1.0.3 h1:ZOigqf7iBxkA4jdQ3am7ATzdlOFp9YzA6NmuvEEZc9g=
+github.com/gobwas/ws v1.0.3/go.mod h1:szmBTxLgaFppYjEmNtny/v3w89xOydFnnZMcgRRu/EM=
+github.com/kataras/go-events v0.0.2 h1:fhyUPXvUbrjIPmH4vRdrAAGoNzdcwJPQmjhg47m1nMU=
+github.com/kataras/go-events v0.0.2/go.mod h1:6IxMW59VJdEIqj3bjFGJvGLRdb0WHtrlxPZy9qXctcg=
+golang.org/x/sys v0.0.0-20200803150936-fd5f0c170ac3 h1:Q8sHd8ZmZZguDQWkUYcD4pIRG5dG+euDEmNyknTRbGs=
+golang.org/x/sys v0.0.0-20200803150936-fd5f0c170ac3/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
