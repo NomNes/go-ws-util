@@ -67,7 +67,9 @@ func (c *Connection) Listen() error {
 					}
 					continue
 				}
-				c.Emit("message", m.Payload)
+				name, message := parsePayload(m.Payload)
+				c.Emit("message", name, message)
+				c.Emit(events.EventName("message "+name), message)
 			}
 		}
 	}()
@@ -82,29 +84,25 @@ func (c *Connection) OnError(name string, handler func(err error)) {
 
 func (c *Connection) OnMessage(handler func(name string, msg Message)) {
 	c.On("message", func(i ...interface{}) {
-		handler(parsePayload(i[0].([]byte)))
+		handler(i[0].(string), i[1].(Message))
 	})
 }
 
 func (c *Connection) OnMessageOnce(handler func(name string, msg Message)) {
 	c.Once("message", func(i ...interface{}) {
-		handler(parsePayload(i[0].([]byte)))
+		handler(i[0].(string), i[1].(Message))
 	})
 }
 
 func (c *Connection) OnNamedMessage(name string, handler func(msg Message)) {
-	c.OnMessage(func(n string, msg Message) {
-		if name == n {
-			handler(msg)
-		}
+	c.On(events.EventName("message "+name), func(i ...interface{}) {
+		handler(i[0].(Message))
 	})
 }
 
 func (c *Connection) OnNamedMessageOnce(name string, handler func(msg Message)) {
-	c.OnMessageOnce(func(n string, msg Message) {
-		if name == n {
-			handler(msg)
-		}
+	c.Once(events.EventName("message "+name), func(i ...interface{}) {
+		handler(i[0].(Message))
 	})
 }
 
