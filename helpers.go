@@ -55,3 +55,14 @@ func (cm *ConnMap) Has(c *Connection) bool {
 	_, ok := cm.items[c]
 	return ok
 }
+
+func (cm *ConnMap) Items() []*Connection {
+	cm.Lock()
+	defer cm.Unlock()
+	cm.init()
+	var items []*Connection
+	for i := range cm.items {
+		items = append(items, i)
+	}
+	return items
+}
