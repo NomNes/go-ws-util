@@ -47,3 +47,11 @@ func (cm *ConnMap) Len() int {
 	cm.init()
 	return len(cm.items)
 }
+
+func (cm *ConnMap) Has(c *Connection) bool {
+	cm.Lock()
+	defer cm.Unlock()
+	cm.init()
+	_, ok := cm.items[c]
+	return ok
+}
