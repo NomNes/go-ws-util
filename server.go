@@ -17,6 +17,7 @@ type Server struct {
 	connections  ConnMap
 	PingDuration time.Duration
 	close        chan error
+	rooms
 	HandshakeValidation
 	ExtraHandler
 	events.EventEmmiter
@@ -56,6 +57,7 @@ func (s *Server) Listen() error {
 			s.connections.Add(c)
 			c.On("close", func(i ...interface{}) {
 				s.connections.Delete(c)
+				s.rooms.delete(c)
 				s.Emit("close", i...)
 			})
 			s.Emit("connection", c, s)
@@ -116,4 +118,20 @@ func (s *Server) BroadcastJson(name string, v interface{}) {
 	for c := range s.connections.items {
 		_ = c.SendJson(name, v)
 	}
+}
+
+func (s *Server) Subscribe(room string, c *Connection) {
+	s.subscribe(room, c)
+}
+
+func (s *Server) Unsubscribe(room string, c *Connection) {
+	s.unsubscribe(room, c)
+}
+
+func (s *Server) BroadcastRoom(room, name string, msg string) {
+	s.rooms.broadcast(room, name, msg)
+}
+
+func (s *Server) BroadcastRoomJson(room, name string, v interface{}) {
+	s.rooms.broadcastJson(room, name, v)
 }
